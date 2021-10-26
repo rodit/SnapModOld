@@ -1,0 +1,3 @@
+include ':ffmpeg-kit-video-4.4'
+include ':app'
+rootProject.name = "SnapMod"
