@@ -1,1 +1,580 @@
-C:/Users/rodit/DexSearch/snap.txt
+certain class MediaPackage {
+    @com.google.gson.annotations.SerializedName("session_id")
+    java.lang.String sessionId;
+    @com.google.gson.annotations.SerializedName("content_id")
+    java.lang.String contentId;
+    @com.google.gson.annotations.SerializedName("mediaId")
+    java.lang.String mediaId;
+}
+
+certain class MediaReference {
+    @com.google.gson.annotations.SerializedName("type")
+    * type;
+    @com.google.gson.annotations.SerializedName("uri")
+    android.net.Uri uri;
+
+    java.lang.String $toString() {
+        .string contains "MediaReference(";
+    }
+}
+
+enum ContentType {
+    * $UNKNOWN;
+    * $SNAP;
+    * $CHAT;
+    * $LOCATION;
+    * $STATUS_SAVE_TO_CAMERA_ROLL;
+    * $STATUS_CONVERSATION_CAPTURE_SCREENSHOT;
+    * $STATUS_CONVERSATION_CAPTURE_RECORD;
+}
+
+enum MessageUpdate {
+    * $UNKNOWN;
+    * $READ;
+    * $RELEASE;
+    * $SAVE;
+    * $UNSAVE;
+    * $ERASE;
+    * $SCREENSHOT;
+    * $SCREEN_RECORD;
+    * $REPLAY;
+}
+
+exact class UploadResultWaiter {
+
+    !MediaPackage mediaPackage;
+
+    void $<init>(*)
+    * $apply(*) {
+        .string "Smart share location is null for mediaPackage sessionId ";
+    }
+}
+
+certain class MediaItemLocator {
+    @com.google.gson.annotations.SerializedName("url")
+    java.lang.String url;
+    @com.google.gson.annotations.SerializedName("expirySecs")
+    java.lang.Long expirySecs;
+    @com.google.gson.annotations.SerializedName("type")
+    java.lang.String type;
+    @com.google.gson.annotations.SerializedName("region")
+    java.lang.String region;
+}
+
+class MediaItem {
+    java.lang.String $toString() {
+        .string "MediaItem(id=";
+    }
+}
+
+class GallerySnapMedia {
+    !MediaItem media;
+
+    java.lang.String getMediaType()
+
+    java.lang.String _() {
+        .field *->MEDIA_V4;
+    }
+
+    java.util.List _() {
+        .call java.util.Collections->singletonList;
+    }
+}
+
+certain class ParameterPackage {
+    java.lang.Boolean isInfiniteDuration;
+    java.lang.Double timerOrDurationSeconds;
+
+    void $<init>(java.lang.String, java.lang.String)
+    void $<init>(java.lang.Boolean, java.lang.Double, ...)
+
+    java.lang.String $toString() {
+        .string contains "ParameterPackage(";
+    }
+}
+
+class LiveSnapMedia {
+    static * _;
+
+    @com.google.gson.annotations.SerializedName("parameterPackage")
+    !ParameterPackage parameterPackage;
+    !MediaItemLocator locator;
+    java.lang.String mediaId;
+    java.lang.String _;
+    java.lang.String _;
+    #MediaType mediaType;
+
+    java.util.List _() {
+        .string "GetMedia isn\'t implemented on SnapParcelContent";
+    }
+}
+
+late enum MediaType {
+    * $IMAGE;
+    * $VIDEO;
+    * $VIDEO_NO_SOUND;
+}
+
+very fuzzy class MessageSenderCrossroad {
+    java.lang.String _;
+    * _;
+    java.util.List _;
+    java.util.List _;
+    * _;
+    * media;
+    * _;
+
+    void $<init>(*, java.util.List, *, java.lang.String, *, java.util.List, *)
+
+    * $apply(*) {
+        .call java.util.Collections->singletonList;
+    }
+}
+
+class UploadResult {
+
+    !MediaPackage mediaPackage;
+
+    java.lang.String $toString() {
+        .string contains "UploadResult(";
+    }
+}
+
+class SaveToCameraRollActionHandler {
+
+    void $<init>(android.content.Context, ...) {
+        .string "SaveToCameraRollActionHandler";
+    }
+
+    void exportMedia(*, *, *) {
+        .string "chat_media";
+    }
+}
+
+enum ChatLayouts {
+
+    static * $UNKNOWN;
+    static * $TEXT_WITH_MEDIA_CARDS;
+    static * $SNAP;
+    static * $CHAT_MEDIA;
+    static * $MEMORIES_STORY;
+    static * $TEXT_STORY_REPLY;
+    static * $AUDIO_NOTE;
+    static * $ERASE;
+    static * $SAVED_SNAP;
+
+    int layoutId;
+}
+
+certain enum SaveType {
+    * $SNAPCHAT_ALBUM;
+    * $SPECTACLES_ALBUM;
+    * $EXTERNAL_APPS;
+    * $SMS;
+    * $EMAIL;
+}
+
+certain enum MessageState {
+
+    static * $NONE;
+    static * $SENT;
+    static * $DELIVERED;
+    static * $VIEWED;
+    static * $SCREENSHOT;
+    static * $PENDING;
+}
+
+certain enum SnapPlaybackStatus {
+
+    static * $PLAYABLE;
+    static * $VIEWEDREPLAYABLE;
+    static * $PLAYING;
+    static * $VIEWEDNOTREPLAYABLE;
+    static * $SAVED;
+    static * $NONE;
+}
+
+interface MessageDataModel {
+
+    java.lang.String _()
+    java.lang.String _()
+    java.lang.String _()
+    java.lang.String _()
+    !MessageState getMessageState()
+    !SnapPlaybackStatus getPlaybackStatus()
+}
+
+certain class ChatReactionsBelowMessageViewModel {
+    static void $<clinit>() {
+        .string "emitMetrics";
+        .string "numTimesToLoop";
+        .string "onReactionTap";
+        .string "reactions";
+    }
+}
+
+class ChatModelBase {
+
+    android.content.Context context;
+    !ChatLayouts chatLayout;
+    !MessageDataModel messageData;
+    java.lang.String senderId;
+    java.util.Map _;
+    boolean boolField;
+    boolean _;
+    #MediaDownloadStatus status;
+    !ChatReactionsBelowMessageViewModel reactionsViewModel;
+
+    java.lang.String $toString() {
+        .string contains "ChatViewModelV1";
+    }
+
+    boolean _()
+    boolean _()
+    boolean _()
+
+    boolean canSave()
+    !SaveType getSaveType()
+}
+
+class ChatModelLiveSnap {
+
+    boolean _;
+
+    void $<init>(android.content.Context, *, *, *, *, !MessageDataModel, !LiveSnapMedia, java.lang.String, java.util.Map, boolean, ...)
+
+    boolean _(*)
+    boolean _()
+}
+
+class ChatModelSavedSnap {
+
+    !MediaType mediaType;
+    android.net.Uri _;
+    android.net.Uri _;
+    !LiveSnapMedia media;
+
+    void $<init>(android.content.Context, !MessageDataModel, java.lang.String, java.util.Map, boolean, !ChatReactionsBelowMessageViewModel, boolean, int, int, !LiveSnapMedia, java.lang.String, *, boolean) {
+        .call java.util.concurrent.TimeUnit->toMillis;
+        .call java.lang.Double->isNaN;
+        .call android.content.Context->getResources;
+        .field !MediaType->UNKNOWN;
+        .string "snap";
+    }
+}
+
+class ChatActionHelper {
+
+    void $<init>(...) {
+        .string "ChatActionHelper";
+    }
+
+    boolean _(!ChatModelBase)
+    boolean canSave(!ChatModelBase, boolean)
+}
+
+
+class ChatModelAudioNote {
+
+    void $<init>(android.content.Context, !ChatLayouts, !MessageDataModel, *, java.lang.String, java.util.Map, boolean, !ChatReactionsBelowMessageViewModel, ...) {
+        .string "chat_media";
+        .string "target";
+    }
+
+    android.net.Uri getUri()
+}
+
+very fuzzy class StreamingMethod {
+
+    java.lang.String $toString() {
+        .string contains "streamingMethod";
+        .string contains "requestHeaders";
+    }
+}
+
+certain interface LateInitialized {
+    * $getValue()
+    boolean $isInitialized()
+}
+
+class OperaMediaInfo {
+
+    java.lang.String uri;
+    #EncryptionAlgorithm encryption;
+    !StreamingMethod streamingMethod;
+
+    java.util.List _;
+    * _;
+    android.graphics.Matrix _;
+    !LateInitialized _;
+
+    java.lang.String $toString() {
+        .string "OperaMediaInfo";
+        .string "hasEncryptionAlgorithm";
+    }
+}
+
+late class EncryptionAlgorithm {
+    java.io.InputStream decryptStream(java.io.InputStream)
+    java.io.OutputStream encryptStream(java.io.OutputStream)
+}
+
+very fuzzy class StoryReportParams {
+
+    java.lang.String snapId;
+    !OperaMediaInfo mediaInfo;
+
+    java.lang.String $toString() {
+        .string contains "StoryReportParams(";
+    }
+}
+
+class InAppReportManagerImpl {
+
+    void $<init>(...) {
+        .string "InAppReportManagerImpl";
+    }
+}
+
+class ReportHandler {
+
+    void $<init>(!InAppReportManagerImpl)
+
+    * $apply(*) {
+        .string "AD_ROOT";
+        .string "STORY_TILE_ROOT";
+        .string "Unsupported in-app reporting type: ";
+    }
+}
+
+class GlobalErrorHandler {
+    define REPORT_ERROR_CASE 182
+
+    int errorCode;
+
+    void accept(*) {
+        .string "Error while downloading ai resources";
+        .string "prepareAudioPlayerForCurrentSnap error";
+        .string "Prepare player error";
+        .string "error while downloading: ";
+    }
+}
+
+class ReportStatusHandler {
+    define ERROR_CASE 0
+
+    int status;
+
+    * $invoke() {
+        .call android.content.Context->getString;
+        .field *->DISPLAY_ONLY;
+        .string "STATUS_BAR";
+    }
+}
+
+late class OperaActionMenuOptionViewModel {
+
+    int iconResource;
+    int stringResource;
+    int textColorResource;
+    java.lang.String eventName;
+    boolean loading;
+}
+
+class OperaContextActions {
+    define REPORT_EVENT_NAME "IN_APP_REPORT"
+    define SAVE_EVENT_NAME "CONTEXT_MENU_SAVE"
+
+    static #OperaActionMenuOptionViewModel _;
+    static #OperaActionMenuOptionViewModel _;
+    static #OperaActionMenuOptionViewModel _;
+    static #OperaActionMenuOptionViewModel _;
+    static #OperaActionMenuOptionViewModel _;
+
+    void $<clinit>() {
+        .string "share_send";
+        .string "IN_APP_REPORT";
+        .string "CONTEXT_MENU_EDIT";
+        .string "REPORT_AD";
+    }
+}
+
+class BitmojiUriHandler {
+
+    void $<init>(...) {
+        .string "BitmojiUriHandler";
+    }
+
+    * handle(android.net.Uri, ...) {
+        .string "BitmojiUriHandler";
+    }
+}
+
+enum FriendAddMethod {
+
+    static * $ADDED_BY_USERNAME;
+    static * $ADDED_BY_ADDED_ME_BACK;
+    static * $ADDED_BY_SUGGESTED;
+    static * $ADDED_BY_SHARED_USERNAME;
+    static * $ADDED_BY_SHARED_STORY;
+    static * $ADDED_BY_GROUP_CHAT;
+}
+
+certain class FriendActionRequest {
+
+    @com.google.gson.annotations.SerializedName("action")
+    java.lang.String action;
+    @com.google.gson.annotations.SerializedName("added_by")
+    java.lang.String addedBy;
+}
+
+class FriendActionClient {
+
+    void $<init>(...) {
+        .string "FriendActionClient";
+    }
+
+    * sendFriendAction(!FriendActionRequest)
+}
+
+certain class LocationMessage {
+
+    java.lang.String _;
+    java.lang.String _;
+    double latitude;
+    double longitude;
+
+    java.lang.String _() {
+        .string "share_location";
+    }
+}
+
+class LocationMessageBuilder {
+
+    [extends !LocationMessage] build(*, java.lang.String, com.snapchat.client.messaging.Conversation, java.util.Map) {
+        .new-instance !LocationMessage;
+    }
+    * transform([extends !LocationMessage], *, !MediaReference)
+}
+
+late interface RxObserver {
+
+    void accept(*)
+    void error(java.lang.Throwable)
+    void disposable(*)
+}
+
+class RxSupplier {
+
+    void subscribe(#RxObserver) {
+        .string contains "RxJavaPlugins.setOnSingleSubscribe";
+        .string "observer is null";
+    }
+}
+
+@*("chat_media/*/*")
+class ChatMediaHandler {
+
+    !RxSupplier resolve(android.net.Uri, java.util.Set, boolean, java.util.Set)
+}
+
+class FeatureMetadata {
+
+    java.lang.String $toString() {
+        .string contains "FeatureMetadata";
+        .string contains "attribution=";
+    }
+}
+
+class Metrics {
+
+    java.lang.String $toString() {
+        .string "Metrics(loadSource=";
+    }
+}
+
+interface MediaStreamProvider {
+
+    !FeatureMetadata _()
+    java.io.InputStream getMediaStream()
+    void $dispose()
+    boolean _()
+    !Metrics _()
+}
+
+certain class CalendarDate {
+
+    int month;
+    int day;
+
+    void $<init>(int, int)
+
+    java.lang.String $toString() {
+        .string contains "CalendarDate";
+        .string contains "day=";
+    }
+}
+
+certain class FriendProfilePageData {
+
+    long dataId;
+    java.lang.String userId;
+    * username;
+    java.lang.String displayName;
+    java.lang.String serverDisplayName;
+    java.lang.String bitmojiAvatarId;
+    java.lang.String bitmojiSelfieId;
+    java.lang.String bitmojiSceneId;
+    java.lang.String bitmojiBackgroundId;
+    #FriendLinkType friendLinkType;
+    java.lang.Long score;
+    java.lang.Long storyRowId;
+    java.lang.Long storyLatestTimestamp;
+    java.lang.Long expirationTimestamp;
+    boolean storyMuted;
+    java.lang.Boolean storyViewed;
+    java.lang.Long addedTimestamp;
+    java.lang.Long reverseAddedTimestamp;
+    !CalendarDate birthday;
+    java.lang.Boolean storyNotificationsEnabled;
+    * addSourceTypeForNonFriend;
+    java.lang.String displayInteractionType;
+
+    java.lang.String $toString() {
+        .string contains "FriendProfilePageData";
+        .string contains "friendLinkType=";
+    }
+}
+
+certain class ProfileFooterInfoSectionLogger {
+
+    java.lang.String _() {
+        .string "ProfileFooterInfoSection";
+    }
+
+    * _() {
+        .string contains "com.snap.profile.sharedui.pagedata.FriendProfileDataProvider";
+        .string contains "com.snap.profile.sharedui.pagedata.GroupProfileDataProvider";
+    }
+}
+
+class FooterInfoItem {
+
+    java.lang.String text;
+
+    void $<init>(java.lang.String, long) {
+        .field *->FOOTER_INFO_ITEM;
+    }
+}
+
+class FriendProfileTransformer {
+
+    !ProfileFooterInfoSectionLogger _;
+
+    void $<init>(!ProfileFooterInfoSectionLogger)
+
+    * $apply(*) {
+        .string "Required value was null.";
+        .call java.util.Collections->singletonList;
+    }
+}
