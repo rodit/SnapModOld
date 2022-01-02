@@ -27,14 +27,6 @@ public class MediaItemLocator extends MappedObject {
     set("region", value);
   }
 
-  public Long getExpirySecs() {
-    return (java.lang.Long) get("expirySecs");
-  }
-
-  public void setExpirySecs(Long value) {
-    set("expirySecs", value);
-  }
-
   public String getUrl() {
     return (java.lang.String) get("url");
   }
@@ -49,6 +41,14 @@ public class MediaItemLocator extends MappedObject {
 
   public void setType(String value) {
     set("type", value);
+  }
+
+  public Long getExpirySecs() {
+    return (java.lang.Long) get("expirySecs");
+  }
+
+  public void setExpirySecs(Long value) {
+    set("expirySecs", value);
   }
 
   public static MediaItemLocator wrap(Object instance) {

@@ -18,28 +18,20 @@ public class ChatLayouts extends MappedObject {
     super(Mappings.get("ChatLayouts"), args);
   }
 
-  public int layoutId() {
-    return (int) get("layoutId");
+  public static ChatLayouts CHAT_MEDIA() {
+    return ChatLayouts.wrap(getStatic("ChatLayouts", "CHAT_MEDIA"));
   }
 
-  public void layoutId(int value) {
-    set("layoutId", value);
+  public static void CHAT_MEDIA(ChatLayouts value) {
+    setStatic("ChatLayouts", "CHAT_MEDIA", value);
   }
 
-  public static ChatLayouts SNAP() {
-    return ChatLayouts.wrap(getStatic("ChatLayouts", "SNAP"));
+  public static ChatLayouts TEXT_STORY_REPLY() {
+    return ChatLayouts.wrap(getStatic("ChatLayouts", "TEXT_STORY_REPLY"));
   }
 
-  public static void SNAP(ChatLayouts value) {
-    setStatic("ChatLayouts", "SNAP", value);
-  }
-
-  public static ChatLayouts SAVED_SNAP() {
-    return ChatLayouts.wrap(getStatic("ChatLayouts", "SAVED_SNAP"));
-  }
-
-  public static void SAVED_SNAP(ChatLayouts value) {
-    setStatic("ChatLayouts", "SAVED_SNAP", value);
+  public static void TEXT_STORY_REPLY(ChatLayouts value) {
+    setStatic("ChatLayouts", "TEXT_STORY_REPLY", value);
   }
 
   public static ChatLayouts AUDIO_NOTE() {
@@ -58,30 +50,6 @@ public class ChatLayouts extends MappedObject {
     setStatic("ChatLayouts", "UNKNOWN", value);
   }
 
-  public static ChatLayouts CHAT_MEDIA() {
-    return ChatLayouts.wrap(getStatic("ChatLayouts", "CHAT_MEDIA"));
-  }
-
-  public static void CHAT_MEDIA(ChatLayouts value) {
-    setStatic("ChatLayouts", "CHAT_MEDIA", value);
-  }
-
-  public static ChatLayouts MEMORIES_STORY() {
-    return ChatLayouts.wrap(getStatic("ChatLayouts", "MEMORIES_STORY"));
-  }
-
-  public static void MEMORIES_STORY(ChatLayouts value) {
-    setStatic("ChatLayouts", "MEMORIES_STORY", value);
-  }
-
-  public static ChatLayouts TEXT_STORY_REPLY() {
-    return ChatLayouts.wrap(getStatic("ChatLayouts", "TEXT_STORY_REPLY"));
-  }
-
-  public static void TEXT_STORY_REPLY(ChatLayouts value) {
-    setStatic("ChatLayouts", "TEXT_STORY_REPLY", value);
-  }
-
   public static ChatLayouts TEXT_WITH_MEDIA_CARDS() {
     return ChatLayouts.wrap(getStatic("ChatLayouts", "TEXT_WITH_MEDIA_CARDS"));
   }
@@ -96,6 +64,38 @@ public class ChatLayouts extends MappedObject {
 
   public static void ERASE(ChatLayouts value) {
     setStatic("ChatLayouts", "ERASE", value);
+  }
+
+  public static ChatLayouts SAVED_SNAP() {
+    return ChatLayouts.wrap(getStatic("ChatLayouts", "SAVED_SNAP"));
+  }
+
+  public static void SAVED_SNAP(ChatLayouts value) {
+    setStatic("ChatLayouts", "SAVED_SNAP", value);
+  }
+
+  public static ChatLayouts MEMORIES_STORY() {
+    return ChatLayouts.wrap(getStatic("ChatLayouts", "MEMORIES_STORY"));
+  }
+
+  public static void MEMORIES_STORY(ChatLayouts value) {
+    setStatic("ChatLayouts", "MEMORIES_STORY", value);
+  }
+
+  public int layoutId() {
+    return (int) get("layoutId");
+  }
+
+  public void layoutId(int value) {
+    set("layoutId", value);
+  }
+
+  public static ChatLayouts SNAP() {
+    return ChatLayouts.wrap(getStatic("ChatLayouts", "SNAP"));
+  }
+
+  public static void SNAP(ChatLayouts value) {
+    setStatic("ChatLayouts", "SNAP", value);
   }
 
   public static ChatLayouts valueOf(String value) {

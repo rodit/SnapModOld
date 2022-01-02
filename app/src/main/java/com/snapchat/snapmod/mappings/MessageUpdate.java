@@ -18,6 +18,14 @@ public class MessageUpdate extends MappedObject {
     super(Mappings.get("MessageUpdate"), args);
   }
 
+  public static MessageUpdate SCREENSHOT() {
+    return MessageUpdate.wrap(getStatic("MessageUpdate", "SCREENSHOT"));
+  }
+
+  public static void SCREENSHOT(MessageUpdate value) {
+    setStatic("MessageUpdate", "SCREENSHOT", value);
+  }
+
   public static MessageUpdate UNKNOWN() {
     return MessageUpdate.wrap(getStatic("MessageUpdate", "UNKNOWN"));
   }
@@ -26,20 +34,12 @@ public class MessageUpdate extends MappedObject {
     setStatic("MessageUpdate", "UNKNOWN", value);
   }
 
-  public static MessageUpdate RELEASE() {
-    return MessageUpdate.wrap(getStatic("MessageUpdate", "RELEASE"));
+  public static MessageUpdate UNSAVE() {
+    return MessageUpdate.wrap(getStatic("MessageUpdate", "UNSAVE"));
   }
 
-  public static void RELEASE(MessageUpdate value) {
-    setStatic("MessageUpdate", "RELEASE", value);
-  }
-
-  public static MessageUpdate READ() {
-    return MessageUpdate.wrap(getStatic("MessageUpdate", "READ"));
-  }
-
-  public static void READ(MessageUpdate value) {
-    setStatic("MessageUpdate", "READ", value);
+  public static void UNSAVE(MessageUpdate value) {
+    setStatic("MessageUpdate", "UNSAVE", value);
   }
 
   public static MessageUpdate ERASE() {
@@ -48,6 +48,14 @@ public class MessageUpdate extends MappedObject {
 
   public static void ERASE(MessageUpdate value) {
     setStatic("MessageUpdate", "ERASE", value);
+  }
+
+  public static MessageUpdate REPLAY() {
+    return MessageUpdate.wrap(getStatic("MessageUpdate", "REPLAY"));
+  }
+
+  public static void REPLAY(MessageUpdate value) {
+    setStatic("MessageUpdate", "REPLAY", value);
   }
 
   public static MessageUpdate SAVE() {
@@ -66,28 +74,20 @@ public class MessageUpdate extends MappedObject {
     setStatic("MessageUpdate", "SCREEN_RECORD", value);
   }
 
-  public static MessageUpdate REPLAY() {
-    return MessageUpdate.wrap(getStatic("MessageUpdate", "REPLAY"));
+  public static MessageUpdate RELEASE() {
+    return MessageUpdate.wrap(getStatic("MessageUpdate", "RELEASE"));
   }
 
-  public static void REPLAY(MessageUpdate value) {
-    setStatic("MessageUpdate", "REPLAY", value);
+  public static void RELEASE(MessageUpdate value) {
+    setStatic("MessageUpdate", "RELEASE", value);
   }
 
-  public static MessageUpdate SCREENSHOT() {
-    return MessageUpdate.wrap(getStatic("MessageUpdate", "SCREENSHOT"));
+  public static MessageUpdate READ() {
+    return MessageUpdate.wrap(getStatic("MessageUpdate", "READ"));
   }
 
-  public static void SCREENSHOT(MessageUpdate value) {
-    setStatic("MessageUpdate", "SCREENSHOT", value);
-  }
-
-  public static MessageUpdate UNSAVE() {
-    return MessageUpdate.wrap(getStatic("MessageUpdate", "UNSAVE"));
-  }
-
-  public static void UNSAVE(MessageUpdate value) {
-    setStatic("MessageUpdate", "UNSAVE", value);
+  public static void READ(MessageUpdate value) {
+    setStatic("MessageUpdate", "READ", value);
   }
 
   public static MessageUpdate valueOf(String value) {

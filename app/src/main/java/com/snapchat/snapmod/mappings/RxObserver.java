@@ -18,12 +18,12 @@ public class RxObserver extends MappedObject {
     super(Mappings.get("RxObserver"), args);
   }
 
-  public void error(Throwable arg0) {
-    call("error", arg0);
-  }
-
   public void disposable(Object arg0) {
     call("disposable", arg0);
+  }
+
+  public void error(Throwable arg0) {
+    call("error", arg0);
   }
 
   public void accept(Object arg0) {

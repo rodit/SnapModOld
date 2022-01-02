@@ -17,12 +17,12 @@ public class MessageDataModel extends MappedObject {
     super(Mappings.get("MessageDataModel"), args);
   }
 
-  public SnapPlaybackStatus getPlaybackStatus() {
-    return SnapPlaybackStatus.wrap(call("getPlaybackStatus", new Object[0]));
-  }
-
   public MessageState getMessageState() {
     return MessageState.wrap(call("getMessageState", new Object[0]));
+  }
+
+  public SnapPlaybackStatus getPlaybackStatus() {
+    return SnapPlaybackStatus.wrap(call("getPlaybackStatus", new Object[0]));
   }
 
   public static MessageDataModel wrap(Object instance) {

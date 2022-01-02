@@ -22,20 +22,20 @@ public class MediaReference extends MappedObject {
     return (String) call("toString", new Object[0]);
   }
 
-  public Object getUri() {
-    return (Object) get("uri");
-  }
-
-  public void setUri(Object value) {
-    set("uri", value);
-  }
-
   public Object getType() {
     return (Object) get("type");
   }
 
   public void setType(Object value) {
     set("type", value);
+  }
+
+  public Object getUri() {
+    return (Object) get("uri");
+  }
+
+  public void setUri(Object value) {
+    set("uri", value);
   }
 
   public static MediaReference wrap(Object instance) {

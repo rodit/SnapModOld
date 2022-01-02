@@ -26,20 +26,20 @@ public class MediaPackage extends MappedObject {
     set("mediaId", value);
   }
 
-  public String getSessionId() {
-    return (java.lang.String) get("sessionId");
-  }
-
-  public void setSessionId(String value) {
-    set("sessionId", value);
-  }
-
   public String getContentId() {
     return (java.lang.String) get("contentId");
   }
 
   public void setContentId(String value) {
     set("contentId", value);
+  }
+
+  public String getSessionId() {
+    return (java.lang.String) get("sessionId");
+  }
+
+  public void setSessionId(String value) {
+    set("sessionId", value);
   }
 
   public static MediaPackage wrap(Object instance) {

@@ -365,17 +365,6 @@ public class SnapHooks implements IXposedHookLoadPackage {
                 }
             });
 
-            Mappings.hook("ReportStatusHandler", "invoke", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (prevent.isEnabled("allow_download_stories")
-                            && ReportStatusHandler.wrap(param.thisObject).getStatus() == ReportStatusHandler.ERROR_CASE) {
-                        XposedBridge.log("Ignoring report error (new).");
-                        param.setResult(null);
-                    }
-                }
-            });
-
             Mappings.hook("BitmojiUriHandler", "handle", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -422,6 +411,9 @@ public class SnapHooks implements IXposedHookLoadPackage {
                     OperaActionMenuOptionViewModel model = OperaActionMenuOptionViewModel.wrap(f.get(null));
                     if (model.isNotNull()) {
                         String eventName = model.getEventName();
+                        if (eventName == null) {
+                            eventName = model.getActionMenuId().toString();
+                        }
                         if (eventName.equals(OperaContextActions.REPORT_EVENT_NAME)) {
                             reportAction = f;
                             XposedBridge.log("Found report action @ " + reportAction.getName());

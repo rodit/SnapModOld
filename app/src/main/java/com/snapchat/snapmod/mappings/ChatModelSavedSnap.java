@@ -25,20 +25,20 @@ public class ChatModelSavedSnap extends MappedObject {
     super(Mappings.get("ChatModelSavedSnap"), args);
   }
 
-  public LiveSnapMedia getMedia() {
-    return LiveSnapMedia.wrap(get("media"));
-  }
-
-  public void setMedia(LiveSnapMedia value) {
-    set("media", value);
-  }
-
   public MediaType getMediaType() {
     return MediaType.wrap(get("mediaType"));
   }
 
   public void setMediaType(MediaType value) {
     set("mediaType", value);
+  }
+
+  public LiveSnapMedia getMedia() {
+    return LiveSnapMedia.wrap(get("media"));
+  }
+
+  public void setMedia(LiveSnapMedia value) {
+    set("media", value);
   }
 
   public static ChatModelSavedSnap wrap(Object instance) {

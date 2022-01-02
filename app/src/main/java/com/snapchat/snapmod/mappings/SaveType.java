@@ -26,12 +26,12 @@ public class SaveType extends MappedObject {
     setStatic("SaveType", "SNAPCHAT_ALBUM", value);
   }
 
-  public static SaveType EXTERNAL_APPS() {
-    return SaveType.wrap(getStatic("SaveType", "EXTERNAL_APPS"));
+  public static SaveType EMAIL() {
+    return SaveType.wrap(getStatic("SaveType", "EMAIL"));
   }
 
-  public static void EXTERNAL_APPS(SaveType value) {
-    setStatic("SaveType", "EXTERNAL_APPS", value);
+  public static void EMAIL(SaveType value) {
+    setStatic("SaveType", "EMAIL", value);
   }
 
   public static SaveType SPECTACLES_ALBUM() {
@@ -50,12 +50,12 @@ public class SaveType extends MappedObject {
     setStatic("SaveType", "SMS", value);
   }
 
-  public static SaveType EMAIL() {
-    return SaveType.wrap(getStatic("SaveType", "EMAIL"));
+  public static SaveType EXTERNAL_APPS() {
+    return SaveType.wrap(getStatic("SaveType", "EXTERNAL_APPS"));
   }
 
-  public static void EMAIL(SaveType value) {
-    setStatic("SaveType", "EMAIL", value);
+  public static void EXTERNAL_APPS(SaveType value) {
+    setStatic("SaveType", "EXTERNAL_APPS", value);
   }
 
   public static SaveType valueOf(String value) {

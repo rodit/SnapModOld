@@ -18,20 +18,20 @@ public class FriendActionRequest extends MappedObject {
     super(Mappings.get("FriendActionRequest"), args);
   }
 
-  public String getAction() {
-    return (java.lang.String) get("action");
-  }
-
-  public void setAction(String value) {
-    set("action", value);
-  }
-
   public String getAddedBy() {
     return (java.lang.String) get("addedBy");
   }
 
   public void setAddedBy(String value) {
     set("addedBy", value);
+  }
+
+  public String getAction() {
+    return (java.lang.String) get("action");
+  }
+
+  public void setAction(String value) {
+    set("action", value);
   }
 
   public static FriendActionRequest wrap(Object instance) {

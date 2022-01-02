@@ -26,20 +26,20 @@ public class CalendarDate extends MappedObject {
     return (String) call("toString", new Object[0]);
   }
 
-  public int getDay() {
-    return (int) get("day");
-  }
-
-  public void setDay(int value) {
-    set("day", value);
-  }
-
   public int getMonth() {
     return (int) get("month");
   }
 
   public void setMonth(int value) {
     set("month", value);
+  }
+
+  public int getDay() {
+    return (int) get("day");
+  }
+
+  public void setDay(int value) {
+    set("day", value);
   }
 
   public static CalendarDate wrap(Object instance) {

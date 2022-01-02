@@ -17,20 +17,20 @@ public class LocationMessage extends MappedObject {
     super(Mappings.get("LocationMessage"), args);
   }
 
-  public double getLatitude() {
-    return (double) get("latitude");
-  }
-
-  public void setLatitude(double value) {
-    set("latitude", value);
-  }
-
   public double getLongitude() {
     return (double) get("longitude");
   }
 
   public void setLongitude(double value) {
     set("longitude", value);
+  }
+
+  public double getLatitude() {
+    return (double) get("latitude");
+  }
+
+  public void setLatitude(double value) {
+    set("latitude", value);
   }
 
   public static LocationMessage wrap(Object instance) {

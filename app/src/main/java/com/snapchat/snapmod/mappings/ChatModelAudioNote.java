@@ -9,7 +9,7 @@ import java.util.Map;
 public class ChatModelAudioNote extends MappedObject {
   public ChatModelAudioNote(Object arg0, ChatLayouts arg1, MessageDataModel arg2,
       GallerySnapMedia arg3, String arg4, Map arg5, boolean arg6,
-      ChatReactionsBelowMessageViewModel arg7, boolean arg8, Object arg9) {
+      ChatReactionsBelowMessageViewModel arg7, boolean arg8, QuotedMessageViewModel arg9) {
     this(new Object[] { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 });
   }
 

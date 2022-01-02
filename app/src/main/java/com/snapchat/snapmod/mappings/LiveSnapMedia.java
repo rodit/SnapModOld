@@ -26,20 +26,20 @@ public class LiveSnapMedia extends MappedObject {
     set("mediaType", value);
   }
 
-  public String getMediaId() {
-    return (java.lang.String) get("mediaId");
-  }
-
-  public void setMediaId(String value) {
-    set("mediaId", value);
-  }
-
   public ParameterPackage getParameterPackage() {
     return ParameterPackage.wrap(get("parameterPackage"));
   }
 
   public void setParameterPackage(ParameterPackage value) {
     set("parameterPackage", value);
+  }
+
+  public String getMediaId() {
+    return (java.lang.String) get("mediaId");
+  }
+
+  public void setMediaId(String value) {
+    set("mediaId", value);
   }
 
   public MediaItemLocator getLocator() {

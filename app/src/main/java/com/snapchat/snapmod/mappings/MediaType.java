@@ -18,14 +18,6 @@ public class MediaType extends MappedObject {
     super(Mappings.get("MediaType"), args);
   }
 
-  public static MediaType VIDEO_NO_SOUND() {
-    return MediaType.wrap(getStatic("MediaType", "VIDEO_NO_SOUND"));
-  }
-
-  public static void VIDEO_NO_SOUND(MediaType value) {
-    setStatic("MediaType", "VIDEO_NO_SOUND", value);
-  }
-
   public static MediaType IMAGE() {
     return MediaType.wrap(getStatic("MediaType", "IMAGE"));
   }
@@ -40,6 +32,14 @@ public class MediaType extends MappedObject {
 
   public static void VIDEO(MediaType value) {
     setStatic("MediaType", "VIDEO", value);
+  }
+
+  public static MediaType VIDEO_NO_SOUND() {
+    return MediaType.wrap(getStatic("MediaType", "VIDEO_NO_SOUND"));
+  }
+
+  public static void VIDEO_NO_SOUND(MediaType value) {
+    setStatic("MediaType", "VIDEO_NO_SOUND", value);
   }
 
   public static MediaType valueOf(String value) {

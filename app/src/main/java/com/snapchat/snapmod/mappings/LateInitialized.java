@@ -17,12 +17,12 @@ public class LateInitialized extends MappedObject {
     super(Mappings.get("LateInitialized"), args);
   }
 
-  public Object getValue() {
-    return (Object) call("getValue", new Object[0]);
-  }
-
   public boolean isInitialized() {
     return (boolean) call("isInitialized", new Object[0]);
+  }
+
+  public Object getValue() {
+    return (Object) call("getValue", new Object[0]);
   }
 
   public static LateInitialized wrap(Object instance) {

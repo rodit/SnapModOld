@@ -18,24 +18,48 @@ public class ChatModelBase extends MappedObject {
     super(Mappings.get("ChatModelBase"), args);
   }
 
-  public boolean canSave() {
-    return (boolean) call("canSave", new Object[0]);
+  public SaveType getSaveType() {
+    return SaveType.wrap(call("getSaveType", new Object[0]));
   }
 
   public String toString() {
     return (String) call("toString", new Object[0]);
   }
 
-  public SaveType getSaveType() {
-    return SaveType.wrap(call("getSaveType", new Object[0]));
+  public boolean canSave() {
+    return (boolean) call("canSave", new Object[0]);
   }
 
-  public boolean getBoolField() {
-    return (boolean) get("boolField");
+  public String getSenderId() {
+    return (java.lang.String) get("senderId");
   }
 
-  public void setBoolField(boolean value) {
-    set("boolField", value);
+  public void setSenderId(String value) {
+    set("senderId", value);
+  }
+
+  public ChatReactionsBelowMessageViewModel getReactionsViewModel() {
+    return ChatReactionsBelowMessageViewModel.wrap(get("reactionsViewModel"));
+  }
+
+  public void setReactionsViewModel(ChatReactionsBelowMessageViewModel value) {
+    set("reactionsViewModel", value);
+  }
+
+  public QuotedMessageViewModel getQuotedMessageViewModel() {
+    return QuotedMessageViewModel.wrap(get("quotedMessageViewModel"));
+  }
+
+  public void setQuotedMessageViewModel(QuotedMessageViewModel value) {
+    set("quotedMessageViewModel", value);
+  }
+
+  public MediaDownloadStatus getStatus() {
+    return MediaDownloadStatus.wrap(get("status"));
+  }
+
+  public void setStatus(MediaDownloadStatus value) {
+    set("status", value);
   }
 
   public Object getContext() {
@@ -54,36 +78,20 @@ public class ChatModelBase extends MappedObject {
     set("messageData", value);
   }
 
-  public String getSenderId() {
-    return (java.lang.String) get("senderId");
+  public boolean getBoolField() {
+    return (boolean) get("boolField");
   }
 
-  public void setSenderId(String value) {
-    set("senderId", value);
+  public void setBoolField(boolean value) {
+    set("boolField", value);
   }
 
-  public ChatLayouts getChatLayout() {
-    return ChatLayouts.wrap(get("chatLayout"));
+  public Object getChatLayout() {
+    return (Object) get("chatLayout");
   }
 
-  public void setChatLayout(ChatLayouts value) {
+  public void setChatLayout(Object value) {
     set("chatLayout", value);
-  }
-
-  public ChatReactionsBelowMessageViewModel getReactionsViewModel() {
-    return ChatReactionsBelowMessageViewModel.wrap(get("reactionsViewModel"));
-  }
-
-  public void setReactionsViewModel(ChatReactionsBelowMessageViewModel value) {
-    set("reactionsViewModel", value);
-  }
-
-  public MediaDownloadStatus getStatus() {
-    return MediaDownloadStatus.wrap(get("status"));
-  }
-
-  public void setStatus(MediaDownloadStatus value) {
-    set("status", value);
   }
 
   public static ChatModelBase wrap(Object instance) {

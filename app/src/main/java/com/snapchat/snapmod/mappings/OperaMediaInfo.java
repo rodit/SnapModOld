@@ -30,20 +30,20 @@ public class OperaMediaInfo extends MappedObject {
     set("streamingMethod", value);
   }
 
-  public EncryptionAlgorithm getEncryption() {
-    return EncryptionAlgorithm.wrap(get("encryption"));
-  }
-
-  public void setEncryption(EncryptionAlgorithm value) {
-    set("encryption", value);
-  }
-
   public String getUri() {
     return (java.lang.String) get("uri");
   }
 
   public void setUri(String value) {
     set("uri", value);
+  }
+
+  public EncryptionAlgorithm getEncryption() {
+    return EncryptionAlgorithm.wrap(get("encryption"));
+  }
+
+  public void setEncryption(EncryptionAlgorithm value) {
+    set("encryption", value);
   }
 
   public static OperaMediaInfo wrap(Object instance) {

@@ -8,7 +8,7 @@ import java.lang.String;
 public class OperaContextActions extends MappedObject {
   public static String REPORT_EVENT_NAME = "IN_APP_REPORT";
 
-  public static String SAVE_EVENT_NAME = "CONTEXT_MENU_SAVE";
+  public static String SAVE_EVENT_NAME = "SAVE";
 
   public OperaContextActions() {
     this(new Object[0]);

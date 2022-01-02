@@ -18,12 +18,28 @@ public class MessageState extends MappedObject {
     super(Mappings.get("MessageState"), args);
   }
 
+  public static MessageState DELIVERED() {
+    return MessageState.wrap(getStatic("MessageState", "DELIVERED"));
+  }
+
+  public static void DELIVERED(MessageState value) {
+    setStatic("MessageState", "DELIVERED", value);
+  }
+
   public static MessageState NONE() {
     return MessageState.wrap(getStatic("MessageState", "NONE"));
   }
 
   public static void NONE(MessageState value) {
     setStatic("MessageState", "NONE", value);
+  }
+
+  public static MessageState SENT() {
+    return MessageState.wrap(getStatic("MessageState", "SENT"));
+  }
+
+  public static void SENT(MessageState value) {
+    setStatic("MessageState", "SENT", value);
   }
 
   public static MessageState VIEWED() {
@@ -34,14 +50,6 @@ public class MessageState extends MappedObject {
     setStatic("MessageState", "VIEWED", value);
   }
 
-  public static MessageState SCREENSHOT() {
-    return MessageState.wrap(getStatic("MessageState", "SCREENSHOT"));
-  }
-
-  public static void SCREENSHOT(MessageState value) {
-    setStatic("MessageState", "SCREENSHOT", value);
-  }
-
   public static MessageState PENDING() {
     return MessageState.wrap(getStatic("MessageState", "PENDING"));
   }
@@ -50,20 +58,12 @@ public class MessageState extends MappedObject {
     setStatic("MessageState", "PENDING", value);
   }
 
-  public static MessageState DELIVERED() {
-    return MessageState.wrap(getStatic("MessageState", "DELIVERED"));
+  public static MessageState SCREENSHOT() {
+    return MessageState.wrap(getStatic("MessageState", "SCREENSHOT"));
   }
 
-  public static void DELIVERED(MessageState value) {
-    setStatic("MessageState", "DELIVERED", value);
-  }
-
-  public static MessageState SENT() {
-    return MessageState.wrap(getStatic("MessageState", "SENT"));
-  }
-
-  public static void SENT(MessageState value) {
-    setStatic("MessageState", "SENT", value);
+  public static void SCREENSHOT(MessageState value) {
+    setStatic("MessageState", "SCREENSHOT", value);
   }
 
   public static MessageState valueOf(String value) {

@@ -18,6 +18,30 @@ public class SnapPlaybackStatus extends MappedObject {
     super(Mappings.get("SnapPlaybackStatus"), args);
   }
 
+  public static SnapPlaybackStatus PLAYABLE() {
+    return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "PLAYABLE"));
+  }
+
+  public static void PLAYABLE(SnapPlaybackStatus value) {
+    setStatic("SnapPlaybackStatus", "PLAYABLE", value);
+  }
+
+  public static SnapPlaybackStatus NONE() {
+    return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "NONE"));
+  }
+
+  public static void NONE(SnapPlaybackStatus value) {
+    setStatic("SnapPlaybackStatus", "NONE", value);
+  }
+
+  public static SnapPlaybackStatus VIEWEDREPLAYABLE() {
+    return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "VIEWEDREPLAYABLE"));
+  }
+
+  public static void VIEWEDREPLAYABLE(SnapPlaybackStatus value) {
+    setStatic("SnapPlaybackStatus", "VIEWEDREPLAYABLE", value);
+  }
+
   public static SnapPlaybackStatus SAVED() {
     return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "SAVED"));
   }
@@ -40,30 +64,6 @@ public class SnapPlaybackStatus extends MappedObject {
 
   public static void VIEWEDNOTREPLAYABLE(SnapPlaybackStatus value) {
     setStatic("SnapPlaybackStatus", "VIEWEDNOTREPLAYABLE", value);
-  }
-
-  public static SnapPlaybackStatus NONE() {
-    return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "NONE"));
-  }
-
-  public static void NONE(SnapPlaybackStatus value) {
-    setStatic("SnapPlaybackStatus", "NONE", value);
-  }
-
-  public static SnapPlaybackStatus PLAYABLE() {
-    return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "PLAYABLE"));
-  }
-
-  public static void PLAYABLE(SnapPlaybackStatus value) {
-    setStatic("SnapPlaybackStatus", "PLAYABLE", value);
-  }
-
-  public static SnapPlaybackStatus VIEWEDREPLAYABLE() {
-    return SnapPlaybackStatus.wrap(getStatic("SnapPlaybackStatus", "VIEWEDREPLAYABLE"));
-  }
-
-  public static void VIEWEDREPLAYABLE(SnapPlaybackStatus value) {
-    setStatic("SnapPlaybackStatus", "VIEWEDREPLAYABLE", value);
   }
 
   public static SnapPlaybackStatus valueOf(String value) {

@@ -19,18 +19,6 @@ public class ReportStatusHandler extends MappedObject {
     super(Mappings.get("ReportStatusHandler"), args);
   }
 
-  public Object invoke() {
-    return (Object) call("invoke", new Object[0]);
-  }
-
-  public int getStatus() {
-    return (int) get("status");
-  }
-
-  public void setStatus(int value) {
-    set("status", value);
-  }
-
   public static ReportStatusHandler wrap(Object instance) {
     return new ReportStatusHandler(instance);
   }
