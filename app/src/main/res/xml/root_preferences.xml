@@ -95,6 +95,17 @@
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
+            app:key="allow_download_public_dp"
+            app:title="@string/allow_download_public_dp_title"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            app:key="public_dp_resolution"
+            app:title="@string/public_dp_resolution_title"
+            app:iconSpaceReserved="false"
+            app:defaultValue="500" />
+
+        <SwitchPreferenceCompat
             app:key="enable_snap_type_override"
             app:title="@string/enable_snap_type_override_title"
             app:iconSpaceReserved="false" />
@@ -117,6 +128,11 @@
             app:entries="@array/friend_add_modes"
             app:entryValues="@array/friend_add_modes_values"
             app:defaultValue="ADDED_BY_USERNAME"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            app:key="bypass_video_length_restrictions"
+            app:title="@string/bypass_video_length_restrictions_title"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>

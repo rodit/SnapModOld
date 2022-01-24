@@ -22,12 +22,12 @@ public class RxObserver extends MappedObject {
     call("disposable", arg0);
   }
 
-  public void error(Throwable arg0) {
-    call("error", arg0);
-  }
-
   public void accept(Object arg0) {
     call("accept", arg0);
+  }
+
+  public void error(Throwable arg0) {
+    call("error", arg0);
   }
 
   public static RxObserver wrap(Object instance) {

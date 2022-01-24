@@ -22,6 +22,10 @@ public class InAppReportManagerImpl extends MappedObject {
     super(Mappings.get("InAppReportManagerImpl"), args);
   }
 
+  public Object handle(Object arg0, Object arg1) {
+    return (Object) call("handle", arg0, arg1);
+  }
+
   public static InAppReportManagerImpl wrap(Object instance) {
     return new InAppReportManagerImpl(instance);
   }

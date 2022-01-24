@@ -69,17 +69,21 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
         try {
+            long updateTime = getPackageManager().getPackageInfo(getPackageName(), 0).lastUpdateTime;
             for (String asset : getAssets().list("mappings")) {
                 if (asset.endsWith(".json")) {
-                    try (InputStream in = getAssets().open("mappings/" + asset);
-                         OutputStream out = new FileOutputStream(new File(Shared.SNAPMOD_MAPPINGS_DIR, asset))) {
-                        Streams.copy(in, out);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    File outputFile = new File(Shared.SNAPMOD_MAPPINGS_DIR, asset);
+                    if (outputFile.lastModified() <= updateTime) {
+                        try (InputStream in = getAssets().open("mappings/" + asset);
+                             OutputStream out = new FileOutputStream(new File(Shared.SNAPMOD_MAPPINGS_DIR, asset))) {
+                            Streams.copy(in, out);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -129,6 +133,7 @@ public class SettingsActivity extends AppCompatActivity {
             });
 
             ((EditTextPreference) findPreference("override_snap_timer")).setOnBindEditTextListener(t -> t.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL));
+            ((EditTextPreference) findPreference("public_dp_resolution")).setOnBindEditTextListener(t -> t.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL));
             ((EditTextPreference) findPreference("location_share_lat")).setOnBindEditTextListener(t -> t.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL));
             ((EditTextPreference) findPreference("location_share_long")).setOnBindEditTextListener(t -> t.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL));
         }

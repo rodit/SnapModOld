@@ -13,4 +13,6 @@ public class Shared {
     public static final String SNAPMOD_MEDIA_PREFIX = "SnapMod_";
 
     public static final String[] MONTHS = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Unknown"};
+
+    public static final boolean USE_NEW_STORY_METHOD = true;
 }

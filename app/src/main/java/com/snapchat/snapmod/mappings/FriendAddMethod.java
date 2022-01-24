@@ -18,22 +18,6 @@ public class FriendAddMethod extends MappedObject {
     super(Mappings.get("FriendAddMethod"), args);
   }
 
-  public static FriendAddMethod ADDED_BY_SHARED_USERNAME() {
-    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_SHARED_USERNAME"));
-  }
-
-  public static void ADDED_BY_SHARED_USERNAME(FriendAddMethod value) {
-    setStatic("FriendAddMethod", "ADDED_BY_SHARED_USERNAME", value);
-  }
-
-  public static FriendAddMethod ADDED_BY_USERNAME() {
-    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_USERNAME"));
-  }
-
-  public static void ADDED_BY_USERNAME(FriendAddMethod value) {
-    setStatic("FriendAddMethod", "ADDED_BY_USERNAME", value);
-  }
-
   public static FriendAddMethod ADDED_BY_SUGGESTED() {
     return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_SUGGESTED"));
   }
@@ -42,12 +26,12 @@ public class FriendAddMethod extends MappedObject {
     setStatic("FriendAddMethod", "ADDED_BY_SUGGESTED", value);
   }
 
-  public static FriendAddMethod ADDED_BY_GROUP_CHAT() {
-    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_GROUP_CHAT"));
+  public static FriendAddMethod ADDED_BY_ADDED_ME_BACK() {
+    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_ADDED_ME_BACK"));
   }
 
-  public static void ADDED_BY_GROUP_CHAT(FriendAddMethod value) {
-    setStatic("FriendAddMethod", "ADDED_BY_GROUP_CHAT", value);
+  public static void ADDED_BY_ADDED_ME_BACK(FriendAddMethod value) {
+    setStatic("FriendAddMethod", "ADDED_BY_ADDED_ME_BACK", value);
   }
 
   public static FriendAddMethod ADDED_BY_SHARED_STORY() {
@@ -58,12 +42,28 @@ public class FriendAddMethod extends MappedObject {
     setStatic("FriendAddMethod", "ADDED_BY_SHARED_STORY", value);
   }
 
-  public static FriendAddMethod ADDED_BY_ADDED_ME_BACK() {
-    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_ADDED_ME_BACK"));
+  public static FriendAddMethod ADDED_BY_SHARED_USERNAME() {
+    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_SHARED_USERNAME"));
   }
 
-  public static void ADDED_BY_ADDED_ME_BACK(FriendAddMethod value) {
-    setStatic("FriendAddMethod", "ADDED_BY_ADDED_ME_BACK", value);
+  public static void ADDED_BY_SHARED_USERNAME(FriendAddMethod value) {
+    setStatic("FriendAddMethod", "ADDED_BY_SHARED_USERNAME", value);
+  }
+
+  public static FriendAddMethod ADDED_BY_GROUP_CHAT() {
+    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_GROUP_CHAT"));
+  }
+
+  public static void ADDED_BY_GROUP_CHAT(FriendAddMethod value) {
+    setStatic("FriendAddMethod", "ADDED_BY_GROUP_CHAT", value);
+  }
+
+  public static FriendAddMethod ADDED_BY_USERNAME() {
+    return FriendAddMethod.wrap(getStatic("FriendAddMethod", "ADDED_BY_USERNAME"));
+  }
+
+  public static void ADDED_BY_USERNAME(FriendAddMethod value) {
+    setStatic("FriendAddMethod", "ADDED_BY_USERNAME", value);
   }
 
   public static FriendAddMethod valueOf(String value) {

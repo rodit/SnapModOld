@@ -18,12 +18,12 @@ public class MediaStreamProvider extends MappedObject {
     super(Mappings.get("MediaStreamProvider"), args);
   }
 
-  public InputStream getMediaStream() {
-    return (InputStream) call("getMediaStream", new Object[0]);
-  }
-
   public void dispose() {
     call("dispose", new Object[0]);
+  }
+
+  public InputStream getMediaStream() {
+    return (InputStream) call("getMediaStream", new Object[0]);
   }
 
   public static MediaStreamProvider wrap(Object instance) {

@@ -27,8 +27,11 @@
     <string name="gallery_snap_time_title">Gallery Snaps Time Limit</string>
     <string name="allow_save_snaps_title">Allow Saving Snaps</string>
     <string name="allow_download_stories_title">Allow Download Stories</string>
+    <string name="allow_download_public_dp_title">Allow Download Public DPs</string>
+    <string name="public_dp_resolution_title">Public DP Download Resolution</string>
     <string name="enable_snap_type_override_title">Override Gallery Snap Type</string>
     <string name="snap_type_override_title">Snap Type Override</string>
+    <string name="bypass_video_length_restrictions_title">Bypass Video Length Restrictions</string>
 
     <string name="location_share_override_title">Location Sharing Override</string>
     <string name="location_share_lat_title">Latitude</string>

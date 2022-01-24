@@ -1,10 +1,42 @@
 package com.snapchat.snapmod;
 
 import static com.snapchat.snapmod.Shared.SNAP_PACKAGE;
+import static com.snapchat.snapmod.Shared.USE_NEW_STORY_METHOD;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
+
+import com.snapchat.snapmod.mappings.CalendarDate;
+import com.snapchat.snapmod.mappings.ChatMediaHandler;
+import com.snapchat.snapmod.mappings.ChatModelAudioNote;
+import com.snapchat.snapmod.mappings.ChatModelBase;
+import com.snapchat.snapmod.mappings.ChatModelSavedSnap;
+import com.snapchat.snapmod.mappings.ContentType;
+import com.snapchat.snapmod.mappings.EncryptionAlgorithm;
+import com.snapchat.snapmod.mappings.FooterInfoItem;
+import com.snapchat.snapmod.mappings.FriendActionRequest;
+import com.snapchat.snapmod.mappings.FriendProfilePageData;
+import com.snapchat.snapmod.mappings.FriendPublicProfileTile;
+import com.snapchat.snapmod.mappings.GlobalErrorHandler;
+import com.snapchat.snapmod.mappings.LiveSnapMedia;
+import com.snapchat.snapmod.mappings.LocationMessage;
+import com.snapchat.snapmod.mappings.MediaPackage;
+import com.snapchat.snapmod.mappings.MediaType;
+import com.snapchat.snapmod.mappings.MessageSenderCrossroad;
+import com.snapchat.snapmod.mappings.MessageUpdate;
+import com.snapchat.snapmod.mappings.OperaActionMenuOptionViewModel;
+import com.snapchat.snapmod.mappings.OperaContextActions;
+import com.snapchat.snapmod.mappings.OperaMediaInfo;
+import com.snapchat.snapmod.mappings.ParameterPackage;
+import com.snapchat.snapmod.mappings.PublicUserReportParams;
+import com.snapchat.snapmod.mappings.RxObserver;
+import com.snapchat.snapmod.mappings.SaveType;
+import com.snapchat.snapmod.mappings.StoryReportParams;
+import com.snapchat.snapmod.mappings.UploadResult;
+import com.util.mappings.MappedObject;
+import com.util.mappings.Mappings;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,13 +45,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -29,10 +59,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-import com.snapchat.snapmod.mappings.*;
-import com.util.mappings.MappedObject;
-import com.util.mappings.Mappings;
-
 public class SnapHooks implements IXposedHookLoadPackage {
 
     public static final String MAIN_ACTIVITY = "com.snap.mushroom.MainActivity";
@@ -41,7 +67,10 @@ public class SnapHooks implements IXposedHookLoadPackage {
     public static final String SAVE_POLICY = "com.snapchat.client.messaging.SavePolicy";
     public static final String NETWORK_API = "com.snapchat.client.network_api.NetworkApi$CppProxy";
 
+    private static final String PROFILE_PICTURE_RESOLUTION_PATTERN = "0,\\d+_";
+
     private static volatile String lastMediaId;
+    private static String lastPublicProfilePictureUrl;
 
     private static Prevent prevent;
 
@@ -335,25 +364,6 @@ public class SnapHooks implements IXposedHookLoadPackage {
                 }
             });
 
-            Mappings.hook("ReportHandler", "apply", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (prevent.isEnabled("allow_download_stories")) {
-                        Toast.makeText(appContext, "Downloading story snap...", Toast.LENGTH_SHORT).show();
-
-                        XposedBridge.log("Starting downloader thread...");
-                        try {
-                            StoryReportParams params = StoryReportParams.wrap(param.args[0]);
-                            new Thread(() -> downloadStorySnap(params)).start();
-                        } catch (Exception e) {
-                            XposedBridge.log(e);
-                        }
-
-                        param.setResult(null);
-                    }
-                }
-            });
-
             Mappings.hook("GlobalErrorHandler", "accept", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -389,6 +399,16 @@ public class SnapHooks implements IXposedHookLoadPackage {
                 }
             });
 
+            Mappings.hookConstructors("MemoriesPickerVideoDurationConfig", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (prevent.isEnabled("bypass_video_length_restrictions")) {
+                        XposedBridge.log("Bypassing video length restrictions (was " + param.args[0] + ").");
+                        param.args[0] = Long.MAX_VALUE;
+                    }
+                }
+            });
+
             Mappings.hook("LocationMessageBuilder", "transform", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -399,6 +419,36 @@ public class SnapHooks implements IXposedHookLoadPackage {
                         loc.setLatitude(lat);
                         loc.setLongitude($long);
                         XposedBridge.log("Location share lat/long overwritten lat=" + lat + ", long=" + $long);
+                    }
+                }
+            });
+
+            Mappings.hookConstructors("FriendPublicProfileTile", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    lastPublicProfilePictureUrl = FriendPublicProfileTile.wrap(param.thisObject).getProfilePictureUrl();
+                }
+            });
+
+            Mappings.hook("InAppReportManagerImpl","handle", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (prevent.isEnabled("allow_download_public_dp") && lastPublicProfilePictureUrl != null && Mappings.isInstance("PublicUserReportParams", param.args[0])) {
+                        String resolution = prevent.getPreferences().getString("public_dp_resolution", "500");
+                        double resDouble = Double.valueOf(resolution);
+                        if (resDouble < 1 || resDouble > 5000) {
+                            resDouble = 500;
+                        }
+                        resolution = String.valueOf((int)resDouble);
+                        String url = lastPublicProfilePictureUrl.replaceAll(PROFILE_PICTURE_RESOLUTION_PATTERN, "0," + resolution + "_");
+                        PublicUserReportParams params = PublicUserReportParams.wrap(param.args[0]);
+                        try {
+                            new Thread(() -> downloadFile(params.getUsername() + "_profile_" + System.currentTimeMillis(), url)).start();
+                        } catch (Exception e) {
+                            XposedBridge.log(e);
+                        }
+
+                        param.setResult(null);
                     }
                 }
             });
@@ -423,23 +473,84 @@ public class SnapHooks implements IXposedHookLoadPackage {
                         }
                     }
                 }
+
                 if (reportAction != null && saveAction != null) {
                     OperaActionMenuOptionViewModel saveActionModel = OperaActionMenuOptionViewModel.wrap(saveAction.get(null));
                     OperaActionMenuOptionViewModel reportActionModel = OperaActionMenuOptionViewModel.wrap(reportAction.get(null));
                     reportActionModel.setIconResource(saveActionModel.getIconResource());
                     reportActionModel.setStringResource(saveActionModel.getStringResource());
+                    reportActionModel.setTextColorResource(saveActionModel.getTextColorResource());
                     reportActionModel.setLoading(false);
                     XposedBridge.log("Replaced report with save button.");
                 }
+
+                if (USE_NEW_STORY_METHOD) {
+                    StoryHelper.init();
+
+                    XC_MethodHook downloadHook = new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            XposedBridge.log("Story report hook.");
+                            if (prevent.isEnabled("allow_download_stories")) {
+                                OperaMediaInfo info = StoryHelper.getMediaInfo(param.args[0]);
+                                if (info != null && info.isNotNull()) {
+                                    //Toast.makeText(appContext, "Downloading story snap...", Toast.LENGTH_SHORT).show();
+
+                                    XposedBridge.log("Starting downloader thread...");
+                                    try {
+                                        new Thread(() -> downloadStorySnap(String.valueOf(System.nanoTime()), info)).start();
+                                    } catch (Exception e) {
+                                        XposedBridge.log(e);
+                                    }
+                                } else {
+                                    XposedBridge.log("Null media info for story download.");
+                                }
+
+                                param.setResult(null);
+                            }
+                        }
+                    };
+
+                    Mappings.hook("PublicUserStoryInAppReportClient", "report", downloadHook);
+                    Mappings.hook("FriendStoryInAppReportClient", "report", downloadHook);
+                    Mappings.hook("PublisherStoryInAppReportClient", "report", downloadHook);
+                    Mappings.hook("DynamicStoryInAppReportClient", "report", downloadHook);
+                    Mappings.hook("AdInAppReportClient", "report", downloadHook);
+                    Mappings.hook("ChatMediaInAppReportClient", "report", downloadHook);
+                    Mappings.hook("TopicSnapInAppReportClient", "report", downloadHook);
+                    Mappings.hook("DirectSnapInAppReportClient", "report", downloadHook);
+                } else {
+                    Mappings.hook("ReportHandler", "apply", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (prevent.isEnabled("allow_download_stories")) {
+                                Toast.makeText(appContext, "Downloading story snap...", Toast.LENGTH_SHORT).show();
+
+                                XposedBridge.log("Starting downloader thread...");
+                                try {
+                                    StoryReportParams params = StoryReportParams.wrap(param.args[0]);
+                                    new Thread(() -> downloadStorySnap(params)).start();
+                                } catch (Exception e) {
+                                    XposedBridge.log(e);
+                                }
+
+                                param.setResult(null);
+                            }
+                        }
+                    });
+                }
             }
+
+            Experiments.hookAll();
         }
     }
 
     private void downloadStorySnap(StoryReportParams params) {
-        try {
-            XposedBridge.log("downloadStorySnap called, params= " + params.toString());
+        downloadStorySnap(params.getSnapId(), params.getMediaInfo());
+    }
 
-            OperaMediaInfo media = params.getMediaInfo();
+    private void downloadStorySnap(String filePrefix, OperaMediaInfo media) {
+        try {
             InputStream stream = new URL(media.getUri()).openStream();
 
             EncryptionAlgorithm enc = media.getEncryption();
@@ -448,9 +559,9 @@ public class SnapHooks implements IXposedHookLoadPackage {
                 stream = enc.decryptStream(stream);
             }
 
-            boolean video = media.getStreamingMethod().isNotNull();
+            boolean video = media.getStreamingMethod().isNotNull() || (media.getUri() != null && media.getUri().endsWith("mp4"));
 
-            File dest = new File(Shared.SNAPMOD_MEDIA_DIR, Shared.SNAPMOD_MEDIA_PREFIX + params.getSnapId() + (video ? ".mp4" : ".jpg"));
+            File dest = new File(Shared.SNAPMOD_MEDIA_DIR, Shared.SNAPMOD_MEDIA_PREFIX + filePrefix + (video ? ".mp4" : ".jpg"));
             dest.getParentFile().mkdirs();
 
             XposedBridge.log("Downloading snap media to path " + dest);
@@ -459,6 +570,22 @@ public class SnapHooks implements IXposedHookLoadPackage {
             stream.close();
         } catch (Exception e) {
             XposedBridge.log("Error while downloading story snap.");
+            XposedBridge.log(e);
+        }
+    }
+
+    private void downloadFile(String filePrefix, String url) {
+        try {
+            InputStream stream = new URL(url).openStream();
+            File dest = new File(Shared.SNAPMOD_MEDIA_DIR, Shared.SNAPMOD_MEDIA_PREFIX + filePrefix + ".jpg");
+            dest.getParentFile().mkdirs();
+
+            XposedBridge.log("Downloading file to " + dest);
+            Streams.copy(stream, dest);
+
+            stream.close();
+        } catch (Exception e) {
+            XposedBridge.log("Error while downloading file.");
             XposedBridge.log(e);
         }
     }

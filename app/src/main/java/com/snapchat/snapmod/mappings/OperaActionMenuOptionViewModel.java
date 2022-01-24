@@ -18,14 +18,6 @@ public class OperaActionMenuOptionViewModel extends MappedObject {
     super(Mappings.get("OperaActionMenuOptionViewModel"), args);
   }
 
-  public int getStringResource() {
-    return (int) get("stringResource");
-  }
-
-  public void setStringResource(int value) {
-    set("stringResource", value);
-  }
-
   public Object getActionMenuId() {
     return (Object) get("actionMenuId");
   }
@@ -42,12 +34,12 @@ public class OperaActionMenuOptionViewModel extends MappedObject {
     set("iconResource", value);
   }
 
-  public String getEventName() {
-    return (java.lang.String) get("eventName");
+  public boolean getLoading() {
+    return (boolean) get("loading");
   }
 
-  public void setEventName(String value) {
-    set("eventName", value);
+  public void setLoading(boolean value) {
+    set("loading", value);
   }
 
   public int getTextColorResource() {
@@ -58,12 +50,20 @@ public class OperaActionMenuOptionViewModel extends MappedObject {
     set("textColorResource", value);
   }
 
-  public boolean getLoading() {
-    return (boolean) get("loading");
+  public int getStringResource() {
+    return (int) get("stringResource");
   }
 
-  public void setLoading(boolean value) {
-    set("loading", value);
+  public void setStringResource(int value) {
+    set("stringResource", value);
+  }
+
+  public String getEventName() {
+    return (java.lang.String) get("eventName");
+  }
+
+  public void setEventName(String value) {
+    set("eventName", value);
   }
 
   public static OperaActionMenuOptionViewModel wrap(Object instance) {
